@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Visitor Check-In | CheckMate</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols_Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="css/enhanced-styles.css" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "surface-variant": "#e2e2e3","tertiary": "#000000","on-primary-fixed-variant": "#474747","on-tertiary-fixed": "#1a1c1e","on-surface": "#1a1c1d","inverse-primary": "#c6c6c6","tertiary-container": "#1a1c1e","tertiary-fixed-dim": "#c6c6c9","surface-container-low": "#f3f3f4","secondary-fixed-dim": "#c6c5cf","primary-fixed-dim": "#c6c6c6","tertiary-fixed": "#e2e2e5","secondary-container": "#e3e1ec","error-container": "#ffdad6","outline": "#7e7576","primary": "#000000","surface-container": "#eeeeef","surface-container-lowest": "#ffffff","on-tertiary": "#ffffff","on-primary": "#ffffff","on-background": "#1a1c1d","surface-bright": "#f9f9fa","primary-container": "#1b1b1b","on-error": "#ffffff","surface-container-highest": "#e2e2e3","on-secondary-fixed": "#1a1b22","surface-dim": "#dadadb","on-error-container": "#93000a","secondary": "#5d5e66","surface": "#f9f9fa","on-surface-variant": "#4c4546","error": "#ba1a1a","surface-tint": "#5e5e5e","on-secondary": "#ffffff","secondary-fixed": "#e3e1ec","primary-fixed": "#e2e2e2","inverse-on-surface": "#f0f1f2","on-primary-fixed": "#1b1b1b","inverse-surface": "#2f3132","on-tertiary-fixed-variant": "#454749","surface-container-high": "#e8e8e9","on-primary-container": "#848484","on-secondary-container": "#63646c","background": "#f9f9fa","outline-variant": "#cfc4c5","on-secondary-fixed-variant": "#46464e","on-tertiary-container": "#838487"
+      },
+      "borderRadius": {"DEFAULT": "0.125rem","lg": "0.25rem","xl": "0.5rem","full": "0.75rem"},
+      "spacing": {"gutter": "24px","xl": "80px","sm": "12px","xs": "4px","lg": "48px","md": "24px","margin-mobile": "16px","base": "8px","margin-desktop": "32px"},
+      "fontFamily": {"headline-lg": ["Hanken Grotesk"],"headline-xl": ["Hanken Grotesk"],"body-sm": ["Inter"],"label-md": ["Inter"],"body-md": ["Inter"],"label-sm": ["Inter"],"headline-lg-mobile": ["Hanken Grotesk"],"body-lg": ["Inter"],"headline-md": ["Hanken Grotesk"]}
+    }
+  }
+}
+</script>
+<style>
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.step-active { 
+  color: #000000; 
+  border-bottom: 2px solid #000000; 
+}
+.step-inactive { 
+  color: #5d5e66; 
+}
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+}
+.scan-pulse {
+  animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; border-color: #000; }
+  50% { opacity: 0.3; border-color: #e2e2e3; }
+}
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex overflow-hidden">
+
+<!-- Sidebar Navigation -->
+<aside class="flex flex-col h-screen py-md px-sm w-64 gap-base bg-surface-bright border-r border-surface-variant">
+  <div class="px-sm mb-lg">
+    <h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tighter">CheckMate</h1>
+  </div>
+  
+  <div class="px-sm mb-md flex items-center gap-sm">
+    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+      <span class="material-symbols-outlined">security</span>
+    </div>
+    <div>
+      <p class="font-label-md text-label-md text-primary font-bold">Officer On Duty</p>
+      <p class="font-label-sm text-label-sm text-secondary">Terminal A-1</p>
+    </div>
+  </div>
+  
+  <nav class="flex-1 space-y-1">
+    <a class="flex items-center gap-sm px-sm py-base text-secondary font-medium hover:bg-surface-container transition-all rounded-lg" href="dashboard.html">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span class="font-label-md text-label-md">Dashboard</span>
+    </a>
+    <a class="flex items-center gap-sm px-sm py-base text-primary font-bold bg-surface-container-high rounded-lg transition-all" href="index.html">
+      <span class="material-symbols-outlined">login</span>
+      <span class="font-label-md text-label-md">Check-In</span>
+    </a>
+    <a class="flex items-center gap-sm px-sm py-base text-secondary font-medium hover:bg-surface-container transition-all rounded-lg" href="schedule.html">
+      <span class="material-symbols-outlined">calendar_today</span>
+      <span class="font-label-md text-label-md">Schedule</span>
+    </a>
+    <a class="flex items-center gap-sm px-sm py-base text-secondary font-medium hover:bg-surface-container transition-all rounded-lg" href="history.html">
+      <span class="material-symbols-outlined">history</span>
+      <span class="font-label-md text-label-md">History</span>
+    </a>
+  </nav>
+  
+  <button class="mt-auto w-full py-sm bg-primary text-on-primary font-bold rounded hover:opacity-90 transition-opacity active:scale-95" onclick="window.location.reload()">New Entry</button>
+</aside>
+
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-screen bg-surface">
+  <!-- Top Navigation Bar -->
+  <header class="flex justify-between items-center w-full px-margin-desktop h-16 bg-surface border-b border-surface-variant">
+    <div class="flex items-center gap-md">
+      <h2 class="font-headline-md text-headline-md font-black tracking-tighter text-primary">VISITOR INTAKE</h2>
+    </div>
+    
+    <div class="flex items-center gap-base">
+      <div class="relative hidden md:block">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+        <input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none w-64" placeholder="Search visitors..." type="text"/>
+      </div>
+      <button class="p-2 hover:bg-surface-container-low rounded-full transition-colors">
+        <span class="material-symbols-outlined text-primary">shield</span>
+      </button>
+      <button class="p-2 hover:bg-surface-container-low rounded-full transition-colors" onclick="window.location.href='login.html'">
+        <span class="material-symbols-outlined text-primary">account_circle</span>
+      </button>
+    </div>
+  </header>
+  
+  <!-- Multi-Step Progress Indicator -->
+  <div class="bg-surface px-margin-desktop py-base border-b border-surface-variant">
+    <div class="flex gap-lg">
+      <div class="flex items-center gap-2 pb-2 step-active">
+        <span class="font-label-md text-label-md">01</span>
+        <span class="font-label-md text-label-md">INTAKE</span>
+      </div>
+      <div class="flex items-center gap-2 pb-2 step-inactive">
+        <span class="font-label-md text-label-md">02</span>
+        <span class="font-label-md text-label-md">BIOMETRIC SCAN</span>
+      </div>
+      <div class="flex items-center gap-2 pb-2 step-inactive">
+        <span class="font-label-md text-label-md">03</span>
+        <span class="font-label-md text-label-md">HOST VERIFICATION</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Content Area: Reorganized Clean Layout -->
+  <div class="flex-1 p-margin-desktop overflow-y-auto">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Main Content Grid -->
+      <div class="grid grid-cols-12 gap-lg">
+        
+        <!-- Left Column: Forms Section -->
+        <div class="col-span-12 lg:col-span-5 space-y-lg">
+          
+          <!-- Visitor Information Card -->
+          <div class="bg-surface-container-lowest border border-surface-variant rounded-large shadow-medium p-lg fade-in">
+            <div class="flex items-center justify-between mb-lg">
+              <h3 class="font-headline-md text-headline-md font-bold text-primary">Visitor Information</h3>
+              <span class="material-symbols-outlined text-secondary">badge</span>
+            </div>
+            
+            <form id="visitor-form" class="space-y-md">
+              <div class="grid grid-cols-2 gap-md">
+                <div class="space-y-sm">
+                  <label class="font-label-sm text-label-sm uppercase tracking-wider text-secondary block">First Name <span class="text-error">*</span></label>
+                  <input id="first_name" class="w-full border border-surface-variant focus:border-primary focus:ring-2 focus:ring-primary/10 rounded-lg bg-surface px-md py-sm input-enhanced transition-all" placeholder="John" type="text" required/>
+                </div>
+                <div class="space-y-sm">
+                  <label class="font-label-sm text-label-sm uppercase tracking-wider text-secondary block">Last Name <span class="text-error">*</span></label>
+                  <input id="last_name" class="w-full border border-surface-variant focus:border-primary focus:ring-2 focus:ring-primary/10 rounded-lg bg-surface px-md py-sm input-enhanced transition-all" placeholder="Doe" type="text" required/>
+                </div>
+              </div>
+              
+              <div class="space-y-sm">
+                <label class="font-label-sm text-label-sm uppercase tracking-wider text-secondary block">Organization</label>
+                <input id="organization" class="w-full border border-surface-variant focus:border-primary focus:ring-2 focus:ring-primary/10 rounded-lg bg-surface px-md py-sm input-enhanced transition-all" placeholder="Company Name" type="text"/>
+              </div>
+              
+              <div class="space-y-sm">
+                <label class="font-label-sm text-label-sm uppercase tracking-wider text-secondary block">Email Address</label>
+                <input id="email" class="w-full border border-surface-variant focus:border-primary focus:ring-2 focus:ring-primary/10 rounded-lg bg-surface px-md py-sm input-enhanced transition-all" placeholder="visitor@example.com" type="email"/>
+              </div>
+              
+              <div class="space-y-sm">
+                <label class="font-label-sm text-label-sm uppercase tracking-wider text-secondary block">Purpose of Visit <span class="text-error">*</span></label>
+                <select id="purpose" class="w-full border border-surface-variant focus:border-primary focus:ring-2 focus:ring-primary/10 rounded-lg bg-surface px-md py-sm input-enhanced transition-all">
+                  <option value="">Select purpose...</option>
+                  <option>Business Meeting</option>
+                  <option>Technical Maintenance</option>
+                  <option>Delivery</option>
+                  <option>Contractor Work</option>
+                  <option>Interview</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          
+          <!-- Host Selection Card -->
+          <div class="bg-surface-container-lowest border border-surface-variant rounded-large shadow-medium p-lg fade-in stagger-2">
+            <div class="flex items-center justify-between mb-lg">
+              <h3 class="font-headline-md text-headline-md font-bold text-primary">Select Host</h3>
+              <span class="material-symbols-outlined text-secondary">person_search</span>
+            </div>
+            
+            <div class="space-y-sm">
+              <!-- Host Search -->
+              <div class="relative mb-md">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+                <input class="w-full pl-10 pr-4 py-sm bg-surface-container border border-surface-variant rounded-lg text-body-sm focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none" placeholder="Search for a host..." type="text"/>
+              </div>
+              
+              <!-- Host Cards -->
+              <div class="space-y-sm max-h-64 overflow-y-auto">
+                <!-- Host Card 1 -->
+                <div class="group flex items-center gap-md p-md border-2 border-surface-variant hover:border-primary cursor-pointer transition-all bg-surface rounded-lg hover-lift" data-host="sarah-chen">
+                  <div class="w-12 h-12 rounded-full border-2 border-surface-variant bg-surface-container flex items-center justify-center text-secondary group-hover:border-primary group-hover:text-primary transition-all">
+                    <span class="material-symbols-outlined">person</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-body-md font-bold text-primary truncate">Sarah Chen</p>
+                    <p class="font-label-sm text-label-sm text-secondary truncate">Director of Operations</p>
+                  </div>
+                  <span class="material-symbols-outlined text-surface-variant group-hover:text-primary transition-all">check_circle</span>
+                </div>
+                
+                <!-- Host Card 2 -->
+                <div class="group flex items-center gap-md p-md border-2 border-surface-variant hover:border-primary cursor-pointer transition-all bg-surface rounded-lg hover-lift" data-host="marcus-thorne">
+                  <div class="w-12 h-12 rounded-full border-2 border-surface-variant bg-surface-container flex items-center justify-center text-secondary group-hover:border-primary group-hover:text-primary transition-all">
+                    <span class="material-symbols-outlined">person</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-body-md font-bold text-primary truncate">Marcus Thorne</p>
+                    <p class="font-label-sm text-label-sm text-secondary truncate">Systems Integration Lead</p>
+                  </div>
+                  <span class="material-symbols-outlined text-surface-variant group-hover:text-primary transition-all">check_circle</span>
+                </div>
+                
+                <!-- Host Card 3 -->
+                <div class="group flex items-center gap-md p-md border-2 border-surface-variant hover:border-primary cursor-pointer transition-all bg-surface rounded-lg hover-lift" data-host="jennifer-williams">
+                  <div class="w-12 h-12 rounded-full border-2 border-surface-variant bg-surface-container flex items-center justify-center text-secondary group-hover:border-primary group-hover:text-primary transition-all">
+                    <span class="material-symbols-outlined">person</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-body-md font-bold text-primary truncate">Jennifer Williams</p>
+                    <p class="font-label-sm text-label-sm text-secondary truncate">HR Manager</p>
+                  </div>
+                  <span class="material-symbols-outlined text-surface-variant group-hover:text-primary transition-all">check_circle</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Right Column: Biometric Section -->
+        <div class="col-span-12 lg:col-span-7 space-y-lg">
+          
+          <!-- Biometric Verification Card -->
+          <div class="bg-surface-container-lowest border border-surface-variant rounded-large shadow-medium p-lg fade-in stagger-3">
+            <div class="flex justify-between items-center mb-lg">
+              <div>
+                <h3 class="font-headline-md text-headline-md font-bold text-primary">Biometric Verification</h3>
+                <p class="font-body-sm text-secondary mt-1">Scan visitor face for identity verification</p>
+              </div>
+              <div class="flex items-center gap-xs px-md py-xs bg-surface-container rounded-full">
+                <span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                <span class="font-label-sm text-label-sm uppercase tracking-widest">CAM-04 LIVE</span>
+              </div>
+            </div>
+            
+            <!-- Camera Feed / Scan View -->
+            <div class="relative bg-gradient-to-br from-surface-dim to-surface-container rounded-lg overflow-hidden aspect-[4/3] flex items-center justify-center group border border-surface-variant">
+              <!-- Scan Frame -->
+              <div class="relative w-full h-full flex items-center justify-center p-lg">
+                <div class="relative w-72 h-72 border-4 border-dashed border-primary/30 rounded-full flex items-center justify-center scan-pulse">
+                  <div class="w-1 h-full bg-primary/10 absolute left-1/2 -translate-x-1/2"></div>
+                  <div class="h-1 w-full bg-primary/10 absolute top-1/2 -translate-y-1/2"></div>
+                  <span class="material-symbols-outlined text-primary/20 text-[120px]">face</span>
+                </div>
+              </div>
+              
+              <!-- Scan Button Overlay -->
+              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <button class="px-xl py-md bg-white text-black font-bold tracking-widest flex items-center gap-sm hover:bg-surface-variant transition-all rounded-lg shadow-elevated btn-press" id="startScanBtn">
+                  <span class="material-symbols-outlined">photo_camera</span>START SCAN
+                </button>
+              </div>
+            </div>
+            
+            <!-- Status Indicators -->
+            <div class="mt-lg grid grid-cols-3 gap-md">
+              <div class="bg-surface border border-surface-variant rounded-lg p-md text-center">
+                <p class="font-label-sm text-label-sm text-secondary uppercase mb-xs">Status</p>
+                <p class="font-body-md font-bold text-primary" id="scan-status">AWAITING INPUT</p>
+              </div>
+              <div class="bg-surface border border-surface-variant rounded-lg p-md text-center">
+                <p class="font-label-sm text-label-sm text-secondary uppercase mb-xs">Confidence</p>
+                <p class="font-body-md font-bold text-primary" id="scan-confidence">--%</p>
+              </div>
+              <div class="bg-surface border border-surface-variant rounded-lg p-md text-center">
+                <p class="font-label-sm text-label-sm text-secondary uppercase mb-xs">Encryption</p>
+                <p class="font-body-md font-bold text-primary flex items-center justify-center gap-xs">
+                  <span class="material-symbols-outlined text-sm">lock</span>AES-256
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Action Buttons -->
+          <div class="flex gap-md justify-end">
+            <button class="px-xl py-md border-2 border-primary text-primary font-bold hover:bg-surface-container-low transition-all rounded-lg btn-press" onclick="window.location.href='dashboard.html'">
+              <span class="flex items-center gap-sm">
+                <span class="material-symbols-outlined">close</span>CANCEL
+              </span>
+            </button>
+            <button class="px-xl py-md bg-primary text-on-primary font-bold btn-gradient hover-glow transition-all rounded-lg btn-press shadow-medium" id="proceedBtn">
+              <span class="flex items-center gap-sm">
+                <span class="material-symbols-outlined">arrow_forward</span>PROCEED TO VERIFICATION
+              </span>
+            </button>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+</main>
+
+<script src="js/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="js/animations.js"></script>
+<script>
+// Micro-interaction for Start Scan button
+const scanBtn = document.getElementById('startScanBtn');
+const scanStatus = document.getElementById('scan-status');
+const scanConfidence = document.getElementById('scan-confidence');
+
+scanBtn.addEventListener('click', function() {
+  this.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> SCANNING...';
+  this.classList.add('opacity-80');
+  scanStatus.textContent = 'SCANNING...';
+  
+  setTimeout(() => {
+    this.innerHTML = '<span class="material-symbols-outlined">check_circle</span> SUCCESS';
+    this.classList.remove('bg-white', 'text-black');
+    this.classList.add('bg-green-100', 'text-green-800');
+    scanStatus.textContent = 'VERIFIED';
+    scanConfidence.textContent = '98%';
+  }, 2000);
+});
+
+// Tonal hover effects for host cards
+const hostCards = document.querySelectorAll('[data-host]');
+let selectedHost = null;
+
+hostCards.forEach(card => {
+  card.addEventListener('click', function() {
+    hostCards.forEach(c => {
+      c.classList.remove('border-primary', 'bg-surface-container-low');
+      const icon = c.querySelector('span.material-symbols-outlined:last-child');
+      icon.style.color = '#e2e2e3';
+      icon.style.fontVariationSettings = "'FILL' 0";
+    });
+    
+    this.classList.add('border-primary', 'bg-surface-container-low');
+    const icon = this.querySelector('span.material-symbols-outlined:last-child');
+    icon.style.color = '#000000';
+    icon.style.fontVariationSettings = "'FILL' 1";
+    
+    selectedHost = this.getAttribute('data-host');
+  });
+});
+
+// Proceed button
+document.getElementById('proceedBtn').addEventListener('click', function() {
+  const firstName = document.getElementById('first_name').value;
+  const lastName = document.getElementById('last_name').value;
+  
+  if (!firstName || !lastName) {
+    alert('Please fill in visitor name');
+    return;
+  }
+  
+  if (!selectedHost) {
+    alert('Please select a host');
+    return;
+  }
+  
+  alert('Visitor check-in complete! Proceeding to verification...');
+  // In real implementation, this would submit to the backend
+});
+</script>
+</body>
+</html>

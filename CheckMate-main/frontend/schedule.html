@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CheckMate - Schedule Visit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="css/enhanced-styles.css" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "surface-variant": "#e2e2e3","tertiary": "#000000","on-primary-fixed-variant": "#474747","on-tertiary-fixed": "#1a1c1e","on-surface": "#1a1c1d","inverse-primary": "#c6c6c6","tertiary-container": "#1a1c1e","tertiary-fixed-dim": "#c6c6c9","surface-container-low": "#f3f3f4","secondary-fixed-dim": "#c6c5cf","primary-fixed-dim": "#c6c6c6","tertiary-fixed": "#e2e2e5","secondary-container": "#e3e1ec","error-container": "#ffdad6","outline": "#7e7576","primary": "#000000","surface-container": "#eeeeef","surface-container-lowest": "#ffffff","on-tertiary": "#ffffff","on-primary": "#ffffff","on-background": "#1a1c1d","surface-bright": "#f9f9fa","primary-container": "#1b1b1b","on-error": "#ffffff","surface-container-highest": "#e2e2e3","on-secondary-fixed": "#1a1b22","surface-dim": "#dadadb","on-error-container": "#93000a","secondary": "#5d5e66","surface": "#f9f9fa","on-surface-variant": "#4c4546","error": "#ba1a1a","surface-tint": "#5e5e5e","on-secondary": "#ffffff","secondary-fixed": "#e3e1ec","primary-fixed": "#e2e2e2","inverse-on-surface": "#f0f1f2","on-primary-fixed": "#1b1b1b","inverse-surface": "#2f3132","on-tertiary-fixed-variant": "#454749","surface-container-high": "#e8e8e9","on-primary-container": "#848484","on-secondary-container": "#63646c","background": "#f9f9fa","outline-variant": "#cfc4c5","on-secondary-fixed-variant": "#46464e","on-tertiary-container": "#838487"
+      },
+      "borderRadius": {"DEFAULT": "0.125rem","lg": "0.25rem","xl": "0.5rem","full": "0.75rem"},
+      "spacing": {"gutter": "24px","xl": "80px","sm": "12px","xs": "4px","lg": "48px","md": "24px","margin-mobile": "16px","base": "8px","margin-desktop": "32px"},
+      "fontFamily": {"headline-lg": ["Hanken Grotesk"],"headline-xl": ["Hanken Grotesk"],"body-sm": ["Inter"],"label-md": ["Inter"],"body-md": ["Inter"],"label-sm": ["Inter"],"headline-lg-mobile": ["Hanken Grotesk"],"body-lg": ["Inter"],"headline-md": ["Hanken Grotesk"]},
+      "fontSize": {"headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],"headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],"body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],"label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],"body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],"label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],"headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],"body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],"headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]}
+    }
+  }
+}
+</script>
+<style>
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #e2e2e3; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #d1d1d1; }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden">
+
+<!-- TopNavBar -->
+<header class="bg-surface border-b border-surface-variant flex justify-between items-center w-full px-margin-desktop h-16 fixed top-0 z-50">
+  <div class="flex items-center gap-base">
+    <span class="font-headline-md text-headline-md font-black tracking-tighter text-primary">CheckMate</span>
+    <div class="h-6 w-[1px] bg-surface-variant mx-md"></div>
+    <nav class="hidden md:flex gap-md">
+      <a class="text-secondary font-normal font-label-md text-label-md hover:bg-surface-container-low transition-colors px-2 py-1" href="dashboard.html">Operations</a>
+      <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="schedule.html">Schedule</a>
+      <a class="text-secondary font-normal font-label-md text-label-md hover:bg-surface-container-low transition-colors px-2 py-1" href="analytics.html">Analytics</a>
+    </nav>
+  </div>
+  
+  <div class="flex items-center gap-md">
+    <div class="relative flex items-center bg-surface-container rounded-lg px-sm py-xs">
+      <span class="material-symbols-outlined text-secondary mr-2">search</span>
+      <input class="bg-transparent border-none focus:ring-0 text-body-sm w-48 font-body-sm" placeholder="Quick Search..." type="text"/>
+    </div>
+    <div class="flex items-center gap-sm">
+      <button class="p-2 hover:bg-surface-container-low transition-colors rounded-full">
+        <span class="material-symbols-outlined text-primary">shield</span>
+      </button>
+      <button class="p-2 hover:bg-surface-container-low transition-colors rounded-full" onclick="window.location.href='login.html'">
+        <span class="material-symbols-outlined text-primary">account_circle</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="flex pt-16 h-screen">
+  <!-- SideNavBar -->
+  <aside class="flex flex-col h-full py-md px-sm w-64 gap-base bg-surface-bright border-r border-surface-variant hidden lg:flex">
+    <div class="px-sm mb-md">
+      <div class="flex items-center gap-sm p-sm rounded-xl bg-surface-container-high mb-sm">
+        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold">JD</div>
+        <div>
+          <p class="font-label-md text-label-md text-primary font-bold">Officer On Duty</p>
+          <p class="text-xs text-secondary">Terminal A-1</p>
+        </div>
+      </div>
+      <button class="w-full bg-primary text-on-primary py-base rounded-lg font-label-md text-label-md hover:opacity-90 transition-all active:scale-95 flex items-center justify-center gap-2" onclick="window.location.href='index.html'">
+        <span class="material-symbols-outlined text-[18px]">add</span>New Entry
+      </button>
+    </div>
+    
+    <nav class="flex flex-col gap-xs">
+      <a class="flex items-center gap-sm px-sm py-base text-secondary font-medium font-label-md text-label-md hover:bg-surface-container transition-all rounded-lg" href="dashboard.html">
+        <span class="material-symbols-outlined">dashboard</span>Dashboard
+      </a>
+      <a class="flex items-center gap-sm px-sm py-base text-secondary font-medium font-label-md text-label-md hover:bg-surface-container transition-all rounded-lg" href="index.html">
+        <span class="material-symbols-outlined">login</span>Check-In
+      </a>
+      <a class="flex items-center gap-sm px-sm py-base text-primary font-bold bg-surface-container-high rounded-lg font-label-md text-label-md" href="schedule.html">
+        <span class="material-symbols-outlined">calendar_today</span>Schedule
+      </a>
+      <a class="flex items-center gap-sm px-sm py-base text-secondary font-medium font-label-md text-label-md hover:bg-surface-container transition-all rounded-lg" href="history.html">
+        <span class="material-symbols-outlined">history</span>History
+      </a>
+    </nav>
+    
+    <div class="mt-auto p-sm border-t border-surface-variant">
+      <div class="bg-surface-container-low p-sm rounded-lg border border-surface-variant">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-1">Status</p>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-green-500"></span>
+          <span class="text-xs font-label-md">System Secure</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+  
+  <!-- Main Content Area -->
+  <main class="flex-1 overflow-y-auto p-margin-desktop bg-background">
+    <div class="max-w-[1200px] mx-auto">
+      <!-- Header -->
+      <div class="mb-lg flex justify-between items-end">
+        <div>
+          <h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Schedule New Visit</h1>
+          <p class="text-secondary font-body-md mt-1">Configure visitor credentials and arrival logistics for terminal access.</p>
+        </div>
+        <div class="flex gap-sm">
+          <button class="bg-surface border border-primary text-primary px-md py-base rounded hover:bg-surface-container-low transition-all font-label-md">Import Guest List</button>
+        </div>
+      </div>
+      
+      <!-- Form Grid -->
+      <form id="schedule-form">
+        <div class="grid grid-cols-12 gap-gutter">
+          <!-- Form Columns -->
+          <div class="col-span-12 lg:col-span-8 flex flex-col gap-md">
+            <!-- Section: Personal Info -->
+            <section class="bg-surface border border-surface-variant p-md rounded">
+              <h3 class="font-label-md text-label-md text-primary mb-md border-b border-surface-container-low pb-2 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">person</span>PERSONAL INFORMATION
+              </h3>
+              <div class="grid grid-cols-2 gap-md">
+                <div class="col-span-2 md:col-span-1">
+                  <label class="block text-xs font-bold text-secondary mb-2 uppercase">Full Name</label>
+                  <input id="full_name" class="w-full border border-surface-variant focus:border-primary focus:ring-0 rounded bg-white p-base font-body-md" placeholder="e.g. Elena Rodriguez" type="text" required/>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                  <label class="block text-xs font-bold text-secondary mb-2 uppercase">Email Address</label>
+                  <input id="email" class="w-full border border-surface-variant focus:border-primary focus:ring-0 rounded bg-white p-base font-body-md" placeholder="elena.r@corporate.com" type="email"/>
+                </div>
+                <div class="col-span-2">
+                  <label class="block text-xs font-bold text-secondary mb-2 uppercase">Organization / Company</label>
+                  <input id="organization" class="w-full border border-surface-variant focus:border-primary focus:ring-0 rounded bg-white p-base font-body-md" placeholder="External Security Consultants LLC" type="text"/>
+                </div>
+              </div>
+            </section>
+            
+            <!-- Section: Logistics -->
+            <section class="bg-surface border border-surface-variant p-md rounded">
+              <h3 class="font-label-md text-label-md text-primary mb-md border-b border-surface-container-low pb-2 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">event</span>LOGISTICS & TIMING
+              </h3>
+              <div class="grid grid-cols-3 gap-md">
+                <div class="col-span-3 md:col-span-1">
+                  <label class="block text-xs font-bold text-secondary mb-2 uppercase">Arrival Date</label>
+                  <input id="arrival_date" class="w-full border border-surface-variant focus:border-primary focus:ring-0 rounded bg-white p-base font-body-md" type="date" required/>
+                </div>
+                <div class="col-span-3 md:col-span-1">
+                  <label class="block text-xs font-bold text-secondary mb-2 uppercase">Start Time</label>
+                  <input id="start_time" class="w-full border border-surface-variant focus:border-primary focus:ring-0 rounded bg-white p-base font-body-md" type="time"/>
+                </div>
+                <div class="col-span-3 md:col-span-1">
+                  <label class="block text-xs font-bold text-secondary mb-2 uppercase">Duration (Hours)</label>
+                  <select id="duration" class="w-full border border-surface-variant focus:border-primary focus:ring-0 rounded bg-white p-base font-body-md appearance-none">
+                    <option>1 Hour</option>
+                    <option>2 Hours</option>
+                    <option>4 Hours (Half Day)</option>
+                    <option>8 Hours (Full Day)</option>
+                    <option>Custom</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+            
+            <!-- Section: Clearance Level -->
+            <section class="bg-surface border border-surface-variant p-md rounded">
+              <h3 class="font-label-md text-label-md text-primary mb-md border-b border-surface-container-low pb-2 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">verified_user</span>CLEARANCE LEVEL
+              </h3>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
+                <label class="cursor-pointer group">
+                  <input checked class="hidden peer" name="clearance" type="radio" value="standard"/>
+                  <div class="p-sm border border-surface-variant rounded flex flex-col items-center text-center transition-all peer-checked:bg-primary peer-checked:border-primary peer-checked:text-on-primary group-hover:bg-surface-container-low peer-checked:group-hover:bg-primary">
+                    <span class="material-symbols-outlined mb-1">person</span>
+                    <span class="text-xs font-bold uppercase">Standard</span>
+                  </div>
+                </label>
+                <label class="cursor-pointer group">
+                  <input class="hidden peer" name="clearance" type="radio" value="vip"/>
+                  <div class="p-sm border border-surface-variant rounded flex flex-col items-center text-center transition-all peer-checked:bg-primary peer-checked:border-primary peer-checked:text-on-primary group-hover:bg-surface-container-low peer-checked:group-hover:bg-primary">
+                    <span class="material-symbols-outlined mb-1">star</span>
+                    <span class="text-xs font-bold uppercase">VIP</span>
+                  </div>
+                </label>
+                <label class="cursor-pointer group">
+                  <input class="hidden peer" name="clearance" type="radio" value="maintenance"/>
+                  <div class="p-sm border border-surface-variant rounded flex flex-col items-center text-center transition-all peer-checked:bg-primary peer-checked:border-primary peer-checked:text-on-primary group-hover:bg-surface-container-low peer-checked:group-hover:bg-primary">
+                    <span class="material-symbols-outlined mb-1">build</span>
+                    <span class="text-xs font-bold uppercase">Maint.</span>
+                  </div>
+                </label>
+                <label class="cursor-pointer group">
+                  <input class="hidden peer" name="clearance" type="radio" value="interview"/>
+                  <div class="p-sm border border-surface-variant rounded flex flex-col items-center text-center transition-all peer-checked:bg-primary peer-checked:border-primary peer-checked:text-on-primary group-hover:bg-surface-container-low peer-checked:group-hover:bg-primary">
+                    <span class="material-symbols-outlined mb-1">record_voice_over</span>
+                    <span class="text-xs font-bold uppercase">Interview</span>
+                  </div>
+                </label>
+              </div>
+            </section>
+          </div>
+          
+          <!-- Summary Column -->
+          <div class="col-span-12 lg:col-span-4">
+            <div class="sticky top-0 flex flex-col gap-md">
+              <!-- Visual Graphic -->
+              <div class="w-full aspect-[4/3] rounded-lg overflow-hidden border border-surface-variant relative">
+                <div class="w-full h-full bg-gradient-to-br from-surface-container to-surface-container-high flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[120px] text-surface-variant">security</span>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-md">
+                  <p class="text-white font-headline-md text-headline-md leading-tight">Secure Perimeter Verification</p>
+                  <p class="text-white/70 text-sm mt-1">Access Terminal A-1 • Level 4 Secure Zone</p>
+                </div>
+              </div>
+              
+              <!-- Summary Card -->
+              <div class="bg-surface border-2 border-primary p-md rounded flex flex-col gap-md shadow-2xl shadow-primary/5">
+                <h3 class="font-headline-md text-headline-md text-primary tracking-tight">Visit Summary</h3>
+                <div class="space-y-sm">
+                  <div class="flex justify-between items-center pb-base border-b border-surface-container-low">
+                    <span class="text-secondary font-label-md text-label-md uppercase">Protocol</span>
+                    <span class="text-primary font-bold font-body-sm">VMS-ALPHA-729</span>
+                  </div>
+                  <div class="flex justify-between items-center pb-base border-b border-surface-container-low">
+                    <span class="text-secondary font-label-md text-label-md uppercase">Vetting Status</span>
+                    <span class="text-primary flex items-center gap-1 font-body-sm">
+                      <span class="material-symbols-outlined text-[16px] text-green-600">check_circle</span>Instant Pass
+                    </span>
+                  </div>
+                  <div class="flex justify-between items-center pb-base">
+                    <span class="text-secondary font-label-md text-label-md uppercase">Badge Fee</span>
+                    <span class="text-primary font-bold font-body-sm">$0.00 (Enterprise)</span>
+                  </div>
+                </div>
+                
+                <div class="bg-surface-container-low p-sm rounded border border-surface-variant">
+                  <p class="text-[10px] text-secondary font-bold uppercase mb-1">Next Steps</p>
+                  <p class="text-xs text-on-surface">Digital credential will be sent to the visitor's email instantly upon confirmation.</p>
+                </div>
+                
+                <button type="submit" class="w-full bg-primary text-on-primary py-md rounded-lg font-headline-md text-headline-md hover:scale-[1.02] transition-transform active:scale-95 flex items-center justify-center gap-base">
+                  Confirm Schedule<span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+                
+                <button type="button" class="w-full bg-transparent text-secondary py-xs font-label-md text-label-md hover:text-primary transition-colors underline underline-offset-4" onclick="window.location.href='dashboard.html'">Cancel and Discard</button>
+              </div>
+              
+              <!-- Context Stats -->
+              <div class="grid grid-cols-2 gap-sm">
+                <div class="bg-surface-bright border border-surface-variant p-sm rounded">
+                  <p class="text-[10px] text-secondary font-bold uppercase">Terminal Load</p>
+                  <p class="text-body-lg font-bold">12%</p>
+                </div>
+                <div class="bg-surface-bright border border-surface-variant p-sm rounded">
+                  <p class="text-[10px] text-secondary font-bold uppercase">Avg. Waiting</p>
+                  <p class="text-body-lg font-bold">4m</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>
+
+<script src="js/schedule.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="js/animations.js"></script>
+<script>
+// Micro-interactions
+document.querySelectorAll('input, select').forEach(element => {
+  element.addEventListener('focus', () => {
+    element.closest('div')?.classList.add('scale-[1.01]');
+    element.style.transition = 'all 0.2s ease-out';
+  });
+  element.addEventListener('blur', () => {
+    element.closest('div')?.classList.remove('scale-[1.01]');
+  });
+});
+
+// Form submission
+const form = document.getElementById('schedule-form');
+const confirmBtn = form.querySelector('button[type="submit"]');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  confirmBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Processing...';
+  
+  setTimeout(() => {
+    confirmBtn.innerHTML = 'Schedule Confirmed <span class="material-symbols-outlined">check</span>';
+    confirmBtn.classList.replace('bg-primary', 'bg-green-600');
+    
+    setTimeout(() => {
+      alert('Visit scheduled successfully!');
+      form.reset();
+      confirmBtn.innerHTML = 'Confirm Schedule<span class="material-symbols-outlined">arrow_forward</span>';
+      confirmBtn.classList.replace('bg-green-600', 'bg-primary');
+    }, 1500);
+  }, 1500);
+});
+</script>
+</body>
+</html>

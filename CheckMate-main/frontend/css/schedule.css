@@ -1,0 +1,169 @@
+@import url('shared.css');
+
+.schedule-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+  align-items: start;
+}
+
+.schedule-form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.schedule-form-header {
+  padding: 24px 28px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.schedule-form-body { padding: 28px; }
+.schedule-form-footer { padding: 0 28px 28px; }
+
+.form-section {
+  margin-bottom: 24px;
+}
+.form-section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.form-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.span-2 { grid-column: 1 / -1; }
+
+input[type="date"], input[type="time"] { color-scheme: dark; }
+
+/* Info panel */
+.info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.info-card-header {
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.info-card-body { padding: 22px; }
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(30,41,59,0.5);
+}
+.info-item:last-child { border-bottom: none; }
+.info-icon {
+  width: 32px; height: 32px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.info-icon.indigo { background: var(--accent-dim); }
+.info-icon.green  { background: var(--green-dim); }
+.info-icon.amber  { background: var(--amber-dim); }
+.info-icon.blue   { background: var(--blue-dim); }
+.info-text strong { font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 2px; }
+.info-text span { font-size: 0.78rem; color: var(--text-muted); }
+
+/* Success overlay */
+.success-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(12px);
+  z-index: 400;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.success-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  animation: modal-in 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.success-icon {
+  width: 64px; height: 64px;
+  background: var(--green-dim);
+  border: 2px solid rgba(16,185,129,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin: 0 auto 20px;
+}
+.success-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+.success-sub { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 20px; }
+.success-badge {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: var(--radius);
+  padding: 8px 18px;
+  display: inline-block;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+.success-details {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  text-align: left;
+  margin-bottom: 24px;
+  font-size: 0.83rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+.success-details strong { color: var(--text); }
+.success-qr {
+  width: 140px; height: 140px;
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
+  margin: 0 auto 20px;
+  display: none;
+  background: white;
+  padding: 4px;
+}
+
+@media (max-width: 900px) {
+  .schedule-layout { grid-template-columns: 1fr; }
+  .form-grid-2 { grid-template-columns: 1fr; }
+  .span-2 { grid-column: 1; }
+}

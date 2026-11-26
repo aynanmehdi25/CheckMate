@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Environment variables (NEVER commit these)
+backend/.env
+
+# Uploads & logs
+uploads/
+backend/uploads/
+server.log
+
+# Deployment artifacts
+.netlify
+config.bat

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CheckMate - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="css/enhanced-styles.css" rel="stylesheet"/>
+<style>
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+body {
+  background-color: #f9f9fa;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d1d6; border-radius: 10px; }
+</style>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "surface-variant": "#e2e2e3",
+        "tertiary": "#000000",
+        "on-primary-fixed-variant": "#474747",
+        "on-tertiary-fixed": "#1a1c1e",
+        "on-surface": "#1a1c1d",
+        "inverse-primary": "#c6c6c6",
+        "tertiary-container": "#1a1c1e",
+        "tertiary-fixed-dim": "#c6c6c9",
+        "surface-container-low": "#f3f3f4",
+        "secondary-fixed-dim": "#c6c5cf",
+        "primary-fixed-dim": "#c6c6c6",
+        "tertiary-fixed": "#e2e2e5",
+        "secondary-container": "#e3e1ec",
+        "error-container": "#ffdad6",
+        "outline": "#7e7576",
+        "primary": "#000000",
+        "surface-container": "#eeeeef",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary": "#ffffff",
+        "on-primary": "#ffffff",
+        "on-background": "#1a1c1d",
+        "surface-bright": "#f9f9fa",
+        "primary-container": "#1b1b1b",
+        "on-error": "#ffffff",
+        "surface-container-highest": "#e2e2e3",
+        "on-secondary-fixed": "#1a1b22",
+        "surface-dim": "#dadadb",
+        "on-error-container": "#93000a",
+        "secondary": "#5d5e66",
+        "surface": "#f9f9fa",
+        "on-surface-variant": "#4c4546",
+        "error": "#ba1a1a",
+        "surface-tint": "#5e5e5e",
+        "on-secondary": "#ffffff",
+        "secondary-fixed": "#e3e1ec",
+        "primary-fixed": "#e2e2e2",
+        "inverse-on-surface": "#f0f1f2",
+        "on-primary-fixed": "#1b1b1b",
+        "inverse-surface": "#2f3132",
+        "on-tertiary-fixed-variant": "#454749",
+        "surface-container-high": "#e8e8e9",
+        "on-primary-container": "#848484",
+        "on-secondary-container": "#63646c",
+        "background": "#f9f9fa",
+        "outline-variant": "#cfc4c5",
+        "on-secondary-fixed-variant": "#46464e",
+        "on-tertiary-container": "#838487"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "gutter": "24px",
+        "xl": "80px",
+        "sm": "12px",
+        "xs": "4px",
+        "lg": "48px",
+        "md": "24px",
+        "margin-mobile": "16px",
+        "base": "8px",
+        "margin-desktop": "32px"
+      },
+      "fontFamily": {
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "body-sm": ["Inter"],
+        "label-md": ["Inter"],
+        "body-md": ["Inter"],
+        "label-sm": ["Inter"],
+        "headline-lg-mobile": ["Hanken Grotesk"],
+        "body-lg": ["Inter"],
+        "headline-md": ["Hanken Grotesk"]
+      },
+      "fontSize": {
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="font-body-md text-on-surface antialiased overflow-hidden h-screen flex">
+
+<!-- SideNavBar -->
+<aside class="flex flex-col h-screen py-md px-sm w-64 gap-base bg-surface-bright border-r border-surface-variant">
+  <div class="px-sm mb-lg">
+    <h1 class="font-headline-md text-headline-md font-bold text-primary">CheckMate</h1>
+  </div>
+  
+  <div class="flex items-center gap-sm p-sm mb-md rounded-lg bg-surface-container-low">
+    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+      <span class="material-symbols-outlined">security</span>
+    </div>
+    <div>
+      <p class="font-label-md text-label-md text-primary">Officer On Duty</p>
+      <p class="font-label-sm text-label-sm text-secondary">Terminal A-1</p>
+    </div>
+  </div>
+  
+  <nav class="flex flex-col gap-xs flex-1">
+    <a class="flex items-center gap-sm px-md py-sm text-primary font-bold bg-surface-container-high rounded-lg transition-all" href="dashboard.html">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span class="font-label-md text-label-md">Dashboard</span>
+    </a>
+    <a class="flex items-center gap-sm px-md py-sm text-secondary font-medium hover:bg-surface-container transition-all" href="index.html">
+      <span class="material-symbols-outlined">login</span>
+      <span class="font-label-md text-label-md">Check-In</span>
+    </a>
+    <a class="flex items-center gap-sm px-md py-sm text-secondary font-medium hover:bg-surface-container transition-all" href="schedule.html">
+      <span class="material-symbols-outlined">calendar_today</span>
+      <span class="font-label-md text-label-md">Schedule</span>
+    </a>
+    <a class="flex items-center gap-sm px-md py-sm text-secondary font-medium hover:bg-surface-container transition-all" href="analytics.html">
+      <span class="material-symbols-outlined">bar_chart</span>
+      <span class="font-label-md text-label-md">Analytics</span>
+    </a>
+  </nav>
+  
+  <div class="mt-auto space-y-sm">
+    <button class="w-full py-md bg-primary text-on-primary font-bold rounded-medium btn-gradient btn-press flex items-center justify-center gap-sm shadow-medium hover-glow" onclick="window.location.href='index.html'">
+      <span class="material-symbols-outlined">add</span>
+      <span class="font-label-md text-label-md">New Entry</span>
+    </button>
+    <button onclick="logout()" class="w-full py-sm text-secondary font-medium rounded-medium flex items-center justify-center gap-sm hover:bg-surface-container transition-all">
+      <span class="material-symbols-outlined">logout</span>
+      <span class="font-label-sm text-label-sm">Logout</span>
+    </button>
+  </div>
+</aside>
+
+<main class="flex-1 flex flex-col h-screen overflow-hidden">
+  <!-- TopAppBar -->
+  <header class="flex justify-between items-center w-full px-margin-desktop h-16 bg-surface border-b border-surface-variant">
+    <div class="flex items-center gap-md">
+      <span class="font-headline-md text-headline-md font-black tracking-tighter text-primary">SYSTEM STATUS: NOMINAL</span>
+      <div class="flex items-center gap-xs px-sm py-1 bg-surface-container-highest rounded-full">
+        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+        <span class="font-label-sm text-label-sm text-primary">LIVE MONITORING</span>
+      </div>
+    </div>
+    
+    <div class="flex items-center gap-md">
+      <div class="relative group">
+        <input id="search-input" class="bg-surface-container-low border-none rounded-lg px-md py-2 w-64 font-body-sm focus:ring-1 focus:ring-primary" placeholder="Search logs, visitors, assets..." type="text"/>
+        <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+      </div>
+      <div class="flex gap-sm">
+        <button class="p-2 hover:bg-surface-container-low transition-colors rounded-lg">
+          <span class="material-symbols-outlined text-primary">shield</span>
+        </button>
+        <button class="p-2 hover:bg-surface-container-low transition-colors rounded-lg" onclick="logout()">
+          <span class="material-symbols-outlined text-primary">account_circle</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <div class="flex-1 p-margin-desktop overflow-y-auto scroll-smooth">
+    <div class="max-w-full w-full mx-auto">
+      
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-md mb-lg">
+        <div class="bg-surface-container-lowest border border-surface-variant p-md rounded-medium card-elevated hover-lift transition-all fade-in stagger-1">
+          <div>
+            <p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">TOTAL REGISTRY</p>
+            <p class="font-headline-md text-headline-md text-primary" id="stat-total">—</p>
+          </div>
+          <span class="material-symbols-outlined text-secondary opacity-50">group</span>
+        </div>
+        
+        <div class="bg-surface-container-lowest border border-surface-variant p-md rounded-medium card-elevated hover-lift transition-all fade-in stagger-2">
+          <div>
+            <p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">ON-SITE NOW</p>
+            <p class="font-headline-md text-headline-md text-primary" id="stat-active">—</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">how_to_reg</span>
+        </div>
+        
+        <div class="bg-surface-container-lowest border border-surface-variant p-md rounded-medium card-elevated hover-lift transition-all fade-in stagger-3">
+          <div>
+            <p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">COMPLETED</p>
+            <p class="font-headline-md text-headline-md text-primary" id="stat-released">—</p>
+          </div>
+          <span class="material-symbols-outlined text-primary">task_alt</span>
+        </div>
+        
+        <div class="bg-surface-container-lowest border border-surface-variant p-md rounded-medium card-elevated hover-lift transition-all fade-in stagger-4">
+          <div>
+            <p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">PENDING EXIT</p>
+            <p class="font-headline-md text-headline-md text-primary" id="stat-pending">—</p>
+          </div>
+          <span class="material-symbols-outlined text-secondary">pending_actions</span>
+        </div>
+        
+        <div class="bg-surface-container-lowest border border-surface-variant p-md rounded-medium card-elevated hover-lift transition-all fade-in stagger-5">
+          <div>
+            <p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">FLAGGED</p>
+            <p class="font-headline-md text-headline-md text-error" id="stat-flagged">—</p>
+          </div>
+          <span class="material-symbols-outlined text-error">flag</span>
+        </div>
+      </div>
+
+      
+      <div class="grid grid-cols-12 gap-gutter">
+        <!-- Main table column -->
+        <div class="col-span-12 xl:col-span-8 space-y-md">
+          <!-- Toolbar -->
+          <div class="flex flex-wrap items-center gap-sm bg-surface-container-lowest border border-surface-variant p-md rounded">
+            <div class="flex items-center gap-xs flex-1">
+              <input id="date-from" type="date" class="bg-surface-container border border-surface-variant rounded px-sm py-xs text-on-surface font-body-sm outline-none focus:border-primary transition-all"/>
+              <span class="text-on-surface-variant text-body-sm">→</span>
+              <input id="date-to" type="date" class="bg-surface-container border border-surface-variant rounded px-sm py-xs text-on-surface font-body-sm outline-none focus:border-primary transition-all"/>
+              <button id="clear-dates" style="display:none;" class="text-on-surface-variant hover:text-error transition-all font-label-sm ml-xs">✕</button>
+            </div>
+
+            <div class="relative ml-auto" id="export-menu">
+              <button id="export-btn" class="flex items-center gap-xs px-md py-sm border border-surface-variant text-on-surface-variant rounded hover:bg-surface-container hover:text-primary transition-all font-label-sm">
+                <span class="material-symbols-outlined text-[15px]">download</span>
+                Export
+                <span class="material-symbols-outlined text-[13px]">expand_more</span>
+              </button>
+              <div class="export-dropdown-sentinel" id="export-dropdown" style="display:none;position:absolute;top:100%;right:0;margin-top:4px;background:#fff;border:1px solid #e2e2e3;border-radius:4px;min-width:160px;z-index:50;">
+                <div class="export-item-s px-md py-sm hover:bg-surface-container cursor-pointer" onclick="downloadExcel('day')">
+                  <span class="material-symbols-outlined text-[14px]">today</span> Today's Log
+                </div>
+                <div class="export-item-s px-md py-sm hover:bg-surface-container cursor-pointer" onclick="downloadExcel('week')">
+                  <span class="material-symbols-outlined text-[14px]">date_range</span> This Week
+                </div>
+                <div class="export-item-s px-md py-sm hover:bg-surface-container cursor-pointer" onclick="downloadExcel('month')">
+                  <span class="material-symbols-outlined text-[14px]">calendar_month</span> This Month
+                </div>
+                <div class="export-item-s px-md py-sm hover:bg-surface-container cursor-pointer" onclick="downloadExcel('all')">
+                  <span class="material-symbols-outlined text-[14px]">download_for_offline</span> All Records
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bulk bar -->
+          <div id="bulk-bar" class="bulk-bar-s hidden items-center gap-md bg-surface-container-lowest border border-surface-variant p-md rounded">
+            <span class="material-symbols-outlined text-[16px]">checklist</span>
+            <span><span id="bulk-count">0</span> selected</span>
+            <div class="flex gap-xs ml-auto">
+              <button onclick="bulkDeleteSelected()" class="flex items-center gap-xs px-sm py-xs bg-error-container border border-error text-error rounded font-label-sm hover:brightness-110 transition-all text-[10px]">
+                <span class="material-symbols-outlined text-[13px]">delete</span> Delete
+              </button>
+              <button onclick="clearSelection()" class="px-sm py-xs border border-surface-variant text-on-surface-variant rounded font-label-sm hover:bg-surface-container transition-all text-[10px]">Clear</button>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="flex gap-xs bg-surface-container-low border border-surface-variant rounded p-xs overflow-x-auto">
+            <button class="tab flex items-center gap-xs px-md py-xs rounded font-label-sm uppercase tracking-widest text-primary bg-surface-container-high whitespace-nowrap" data-status="all">
+              All <span class="bg-primary text-on-primary px-xs py-[1px] rounded text-[10px] font-bold" id="tab-count-all">0</span>
+            </button>
+            <button class="tab flex items-center gap-xs px-md py-xs rounded font-label-sm uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-high transition-all whitespace-nowrap" data-status="active">
+              On-Site <span class="bg-primary text-on-primary px-xs py-[1px] rounded text-[10px] font-bold" id="tab-count-active">0</span>
+            </button>
+            <button class="tab flex items-center gap-xs px-md py-xs rounded font-label-sm uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-high transition-all whitespace-nowrap" data-status="released">Completed</button>
+            <button class="tab flex items-center gap-xs px-md py-xs rounded font-label-sm uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-high transition-all whitespace-nowrap" data-status="security-pending">Pending Exit</button>
+            <button class="tab flex items-center gap-xs px-md py-xs rounded font-label-sm uppercase tracking-widest text-on-surface-variant hover:bg-surface-container-high transition-all whitespace-nowrap" data-status="scheduled">Scheduled</button>
+            <button class="tab flex items-center gap-xs px-md py-xs rounded font-label-sm uppercase tracking-widest text-error/70 hover:bg-surface-container-high transition-all whitespace-nowrap" data-status="flagged">
+              <span class="material-symbols-outlined text-[13px]">flag</span> Flagged
+            </button>
+          </div>
+
+          <!-- Table -->
+          <div class="bg-surface-container-lowest border border-surface-variant rounded overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-surface-container-low sticky top-0">
+                  <tr>
+                    <th class="px-md py-sm text-left" style="width:36px;"><input type="checkbox" id="select-all" class="rounded" style="accent-color:#000;cursor:pointer;"/></th>
+                    <th class="px-md py-sm font-label-md text-label-md text-secondary text-left">VISITOR</th>
+                    <th class="px-md py-sm font-label-md text-label-md text-secondary text-left">CONTACT</th>
+                    <th class="px-md py-sm font-label-md text-label-md text-secondary text-left">DEPT / HOST</th>
+                    <th class="px-md py-sm font-label-md text-label-md text-secondary text-left">PURPOSE</th>
+                    <th class="px-md py-sm font-label-md text-label-md text-secondary text-left">TIMELINE</th>
+                    <th class="px-md py-sm font-label-md text-label-md text-secondary text-left">STATUS</th>
+                    <th class="px-md py-sm font-label-md text-label-md text-secondary text-right">ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody id="visitor-tbody" class="divide-y divide-surface-variant">
+                  <tr><td colspan="8" class="px-md py-lg text-center text-on-surface-variant">Loading visitor records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity feed column -->
+        <div class="col-span-12 xl:col-span-4">
+          <div class="bg-surface-container-lowest border border-surface-variant rounded overflow-hidden sticky top-4">
+            <div class="bg-surface-container-low px-md py-sm border-b border-surface-variant flex items-center justify-between">
+              <span class="font-label-md text-label-md text-primary font-bold uppercase tracking-widest">Live Activity Feed</span>
+              <div class="flex items-center gap-xs">
+                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <button onclick="loadActivity()" class="material-symbols-outlined text-[14px] text-on-surface-variant hover:text-primary transition-all">refresh</button>
+              </div>
+            </div>
+            <div id="activity-feed" class="divide-y divide-surface-variant max-h-[500px] overflow-y-auto">
+              <div class="p-md text-on-surface-variant text-body-sm font-body-md uppercase tracking-widest opacity-50">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Flag modal -->
+<div id="flag-modal" class="fixed inset-0 bg-primary/20 backdrop-blur-sm flex items-center justify-center z-50 hidden" onclick="if(event.target===this)closeFlagModal()">
+  <div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-lg max-w-md w-full mx-md">
+    <div class="flex items-center gap-md mb-lg">
+      <div class="w-10 h-10 rounded-full bg-error-container border border-error flex items-center justify-center">
+        <span class="material-symbols-outlined text-error text-[18px]">flag</span>
+      </div>
+      <div>
+        <h3 class="font-headline-md text-headline-md text-on-surface">Flag Visitor</h3>
+        <p class="font-label-sm text-label-sm text-on-surface-variant">Mark for security review</p>
+      </div>
+    </div>
+    <div class="mb-lg">
+      <label class="block font-label-sm uppercase tracking-widest text-on-surface-variant mb-sm">Reason for Flag</label>
+      <textarea id="flag-reason" rows="3" class="w-full bg-surface-container border border-surface-variant rounded py-md px-md text-on-surface text-sm focus:outline-none focus:border-error transition-all resize-none" placeholder="Describe the security concern..."></textarea>
+    </div>
+    <div class="flex gap-sm justify-end">
+      <button onclick="closeFlagModal()" class="px-lg py-sm border border-surface-variant text-on-surface-variant rounded font-label-sm hover:bg-surface-container transition-all">Cancel</button>
+      <button onclick="submitFlag()" class="flex items-center gap-xs px-lg py-sm bg-error text-on-error rounded font-label-sm hover:brightness-110 transition-all">
+        <span class="material-symbols-outlined text-[15px]" style="font-variation-settings:'FILL' 1;">flag</span>
+        Flag Visitor
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container fixed bottom-md right-md z-50" id="toasts"></div>
+<script src="js/dashboard.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="js/animations.js"></script>
+</body>
+</html>
